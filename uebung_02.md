@@ -49,15 +49,15 @@ Primary Key und Foreign Key
 Importiere die SQL-Dump-Datei in dein eigenes Schema. Wie lautet dazu der Befehl um dem import zu starten?
 
 #### Lösung
-Deine Lösung
-`start tutorium.sql`
+```sql
+start tutorium.sql
+```
 
 ### Aufgabe 7
 Gebe alle Datensätze der Tabelle `ACCOUNT` aus.
 
 #### Lösung
 ```sql
-Deine Lösung
 select * from account;
 ```
 
@@ -66,35 +66,35 @@ Modifiziere Aufgabe 7 so, dass nur die Spalte `ACCOUNT_ID` ausgegeben wird.
 
 #### Lösung
 ```sql
-Deine Lösung
-`select account_id from account;`
+select account_id from account;
+```
 
 ### Aufgabe 9
 Gebe alle Spalten der Tabelle `VEHICLE` aus.
 
 #### Lösung
 ```sql
-Deine Lösung
-`select * from vehicle;`
+select * from vehicle;
+```
 
 ### Aufgabe 10
 Kombiniere Aufgabe 7 und 9 so, dass nur Personen (`ACCOUNT`) angezeigt werden, die ein Auto (`VEHICLE`) besitzen.
 
 #### Lösung
 ```sql
-Deine Lösung
-`select surname from account acc
-where acc.account_id in (Select account_id from acc_vehic);`
+select surname from account acc
+where acc.account_id in (Select account_id from acc_vehic);
+```
 
 ### Aufgabe 11
 Modifizierde die Aufgabe 10 so, dass nur die Person mit der `ACCOUNT_ID` = `7` angezeigt wird.
 
 #### Lösung
 ```sql
-Deine Lösung
-`select surname from account acc
+select surname from account acc
 where acc.account_id in (Select account_id from acc_vehic)
-and acc.account_id = 7;`
+and acc.account_id = 7;
+```
 
 ### Aufgabe 12
 Erstelle für dich einen neuen Benutzer.
@@ -102,16 +102,17 @@ Erstelle für dich einen neuen Benutzer.
 
 #### Lösung
 ```sql
-`insert into account (account_id, surname, forename, email, c_date, u_date) values (7, 'Pawel', 'Rabinovic', 't@test.de', sysdate, sysdate);`
+insert into account (account_id, surname, forename, email, c_date, u_date) values (7, 'Pawel', 'Rabinovic', 't@test.de', sysdate, sysdate);
+```
 
 ### Aufgabe 13
 Erstelle für deinen neuen Benutzer ein neues Auto. Dieses Auto dient als Vorlage für die nächten Aufgaben.
 
 #### Lösung
 ```sql
-Deine Lösung
-`insert into vehicle (vehicle_id, vehicle_type_id, producer_id,version,default_gas_id,ps,build_year,doors,c_date,u_date)
-values (7777,1,2, 'i8', 3, 500, to_date('01.01.2016', 'DD.MM.YYYY'), 4,sysdate,sysdate); `
+insert into vehicle (vehicle_id, vehicle_type_id, producer_id,version,default_gas_id,ps,build_year,doors,c_date,u_date)
+values (7777,1,2, 'i8', 3, 500, to_date('01.01.2016', 'DD.MM.YYYY'), 4,sysdate,sysdate);
+```
 
 ### Aufgabe 14
 Verknüpfe das aus Aufgabe 13 erstellte neue Auto mit deinem neuen Benutzer aus Aufgabe 12 in der Tabelle `ACC_VEHIC` und erstelle den ersten Rechnungsbeleg.
@@ -134,5 +135,5 @@ Speichere alle Änderungen deiner offenen Transaktion. Wie lautet der SQL-Befehl
 
 #### Lösung
 ```sql
-Deine Lösung
+commit;
 ```
