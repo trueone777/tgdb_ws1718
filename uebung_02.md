@@ -17,7 +17,7 @@ Schaue dir das Datenbankmodell an. Wofür steht hinter dem Datentyp `NUMBER` die
 Nehme dir die Oracle [Dokumentation](https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#CNCPT012) zu Hilfe.
 
 #### Lösung
-Die erste Zahl gibt die Anzahl der Stellen vor dem Komma, die zweite Zahl die Anzahl der Stellen nach dem Komma einer Zahl ein.
+Die erste Zahl gibt die Geamtanzahl der Ziffern einer Zahl, die zweite Zahl die Anzahl der Stellen nach dem Komma der Zahl an.
 
 ### Aufgabe 2
 Was bedeuten die durchgezogenen Linien, die zwischen einigen Tabellen abgebildet sind?
@@ -103,7 +103,7 @@ Erstelle für dich einen neuen Benutzer.
 #### Lösung
 ```sql
 insert into account (account_id, surname, forename, email, c_date, u_date) 
-values (7, 'Pawel', 'Rabinovic', 't@test.de', sysdate, sysdate);
+values (10, 'Pawel', 'Rabinovic', 't@test.de', sysdate, sysdate);
 ```
 
 ### Aufgabe 13
@@ -120,7 +120,13 @@ Verknüpfe das aus Aufgabe 13 erstellte neue Auto mit deinem neuen Benutzer aus 
 
 #### Lösung
 ```sql
-Deine Lösung
+insert into acc_vehic 
+values (1818,10,7777, 'BW:345:Z009', 'Flitzer', 165000,25000,120000,75000,to_date ('22.05.2016','DD.MM.YYYY'), to_date ('17.08.2017','DD.MM.YYYY'),null,sysdate,sysdate);
+```
+
+```sql
+insert into receipt
+values (12345,10,1818,7.55,3,5,1.44,32345.11,160,sysdate,sysdate,sysdate);
 ```
 
 ### Aufgabe 15
@@ -128,7 +134,9 @@ Deine Lösung
 
 #### Lösung
 ```sql
-Deine Lösung
+update account
+set surname = 'Zimmermann'
+where account_id = 7;
 ```
 
 ### Aufgabe 16
