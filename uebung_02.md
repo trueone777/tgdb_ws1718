@@ -58,7 +58,8 @@ Gebe alle Datensätze der Tabelle `ACCOUNT` aus.
 #### Lösung
 ```sql
 Deine Lösung
-`select * from account;`
+select * from account;
+```
 
 ### Aufgabe 8
 Modifiziere Aufgabe 7 so, dass nur die Spalte `ACCOUNT_ID` ausgegeben wird.
