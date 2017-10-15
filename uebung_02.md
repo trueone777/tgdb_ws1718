@@ -102,7 +102,8 @@ Erstelle für dich einen neuen Benutzer.
 
 #### Lösung
 ```sql
-insert into account (account_id, surname, forename, email, c_date, u_date) values (7, 'Pawel', 'Rabinovic', 't@test.de', sysdate, sysdate);
+insert into account (account_id, surname, forename, email, c_date, u_date) 
+values (7, 'Pawel', 'Rabinovic', 't@test.de', sysdate, sysdate);
 ```
 
 ### Aufgabe 13
