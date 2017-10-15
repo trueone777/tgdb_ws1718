@@ -49,7 +49,6 @@ Primary Key und Foreign Key
 Importiere die SQL-Dump-Datei in dein eigenes Schema. Wie lautet dazu der Befehl um dem import zu starten?
 
 #### Lösung
-```sql
 Deine Lösung
 `start tutorium.sql`
 
