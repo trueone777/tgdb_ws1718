@@ -23,7 +23,13 @@ Erstelle eine `INNER JOIN` (optional `WHERE`) Abfrage um die Beziehungen zwische
 
 #### Lösung
 ```sql
-Deine Lösung
+Select p.provider_name as Anbieter, gs.street as Straße, a.plz , a.city as Ort, c.country_name as Land, c.duty_amount as Steuer from gas_station gs
+inner join provider p
+on (gs.provider_id = p.provider_id)
+inner join country c
+on (gs.country_id = c.country_id)
+inner join address a
+on (gs.address_id = a.address_id);
 ```
 
 ### Aufgabe 2
@@ -31,7 +37,14 @@ Suche alle Tankstellen raus, deren Straßenname an zweiter Stelle ein `U` haben 
 
 #### Lösung
 ```sql
-Deine Lösung
+Select p.provider_name as Anbieter, gs.street as Straße, a.plz , a.city as Ort, c.country_name as Land, c.duty_amount as Steuer from gas_station gs
+inner join provider p
+on (gs.provider_id = p.provider_id)
+inner join country c
+on (gs.country_id = c.country_id)
+inner join address a
+on (gs.address_id = a.address_id)
+ where regexp_like(gs.street, '^.[n,N]');
 ```
 
 ### Aufgabe 3
@@ -39,7 +52,14 @@ Suche alle Tankstellen raus, die sich in Trier befinden.
 
 #### Lösung
 ```sql
-Deine Lösung
+Select p.provider_name as Anbieter, gs.street as Straße, a.plz , a.city as Ort, c.country_name as Land, c.duty_amount as Steuer from gas_station gs
+inner join provider p
+on (gs.provider_id = p.provider_id)
+inner join country c
+on (gs.country_id = c.country_id)
+inner join address a
+on (gs.address_id = a.address_id)
+ where a.city = 'Trier';
 ```
 
 #### Aufgabe 4
