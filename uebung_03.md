@@ -44,7 +44,7 @@ inner join country c
 on (gs.country_id = c.country_id)
 inner join address a
 on (gs.address_id = a.address_id)
- where regexp_like(gs.street, '^.[n,N]');
+ where regexp_like(gs.street, '^.[u,U]');
 ```
 
 ### Aufgabe 3
@@ -168,7 +168,7 @@ Wie viele Benutzer haben einen LKW registriert?
 
 #### Lösung
 ```sql
-select count(account_id) as Anzahl_LKW_Nutzer from acc_vehic av
+select count(distinct account_id) as Anzahl_LKW_Nutzer from acc_vehic av
 inner join vehicle vehc
 on (av.vehicle_id = vehc.vehicle_id)
 inner join vehicle_type t
