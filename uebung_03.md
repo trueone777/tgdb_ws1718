@@ -80,7 +80,20 @@ Erstelle eine INNER JOIN (optional `WHERE`) Abfrage um die Beziehung zwischen de
 
 #### Lösung
 ```sql
-Deine Lösung
+Select acc.forename, acc.surname, veht.vehicle_type_name, vehc.version, vehc.build_year, prod.producer_name, g.gas_name
+from acc_vehic accve
+inner join account acc
+on (accve.account_id = acc.account_id)
+inner join vehicle vehc
+on (accve.vehicle_id = vehc.vehicle_id)
+inner join vehicle_type veht
+on (vehc.vehicle_type_id = veht.vehicle_type_id)
+inner join producer prod
+on (vehc.producer_id = prod.producer_id)
+inner join gas g
+on (vehc.default_gas_id = g.gas_id);
+
+column forename format a16 usw.
 ```
 
 ### Aufgabe 6
@@ -88,7 +101,17 @@ Welche Fahrzeuge wurden noch keinem Benutzer zugewiesen? Gebe über das Fahrzeug
 
 #### Lösung
 ```sql
-Deine Lösung
+Select  veht.vehicle_type_name, vehc.version, vehc.build_year, prod.producer_name, g.gas_name
+from vehicle veh
+inner join vehicle vehc
+on (veh.vehicle_id = vehc.vehicle_id)
+inner join vehicle_type veht
+on (vehc.vehicle_type_id = veht.vehicle_type_id)
+inner join producer prod
+on (vehc.producer_id = prod.producer_id)
+inner join gas g
+on (vehc.default_gas_id = g.gas_id)
+where veh.vehicle_id not in (Select vehicle_id from acc_vehic);
 ```
 
 ### Aufgabe 7
@@ -96,7 +119,8 @@ Verknüpfe eines der Autos aus Aufgabe 6 mit deinem Benutzernamen. Verwende dazu
 
 #### Lösung
 ```
-Deine Lösung
+insert into acc_vehic
+values (5661, 10, 1, 'g:334' , 'Autowrack', 555.55,210000, 477.77, 245000, sysdate, sysdate, null,sysdate,sysdate);
 ```
 
 ### Aufgabe 8
@@ -104,7 +128,12 @@ An welcher Tankstelle wurde noch nie getankt? Gebe zu den Tankstellen die Inform
 
 #### Lösung
 ```sql
-Deine Lösung
+select gas_station_id, street,a.plz, a.city,c.country_name from gas_station
+inner join country c
+on (gas_station.country_id = c.country_id)
+inner join address a
+on (gas_station.address_id = a.address_id)
+where  gas_station_id  in (select gas_station_id from gas_station minus select default_gas_station from acc_vehic);
 ```
 
 ### Aufgabe 9
@@ -112,7 +141,14 @@ Liste alle Benutzer (Vorname und Nachname) mit Fahrzeug (Hersteller, Modell, Ali
 
 #### Lösung
 ```sql
-Deine Lösung
+select a.forename as Vorname, a.surname as Nachname, prod.producer_name as Hersteller, vehc.version as Modell, alias from acc_vehic av
+inner join account a
+on (av.account_id = a.account_id)
+inner join vehicle vehc
+on (av.vehicle_id = vehc.vehicle_id)
+inner join producer prod
+on (vehc.producer_id = prod.producer_id)
+where a.account_id not in (select account_id from receipt);
 ```
 
 ### Aufgabe 10
@@ -120,7 +156,12 @@ Liste alle Benutzer auf, die mit einem Fahrzeug schonmal im Außland tanken ware
 
 #### Lösung
 ```sql
-Deine Lösung
+Select default_gas_station,a.forename as Vorname, a.surname as Nachname
+from acc_vehic av
+inner join account a
+on (av.account_id = a.account_id)
+ where default_gas_station != 1 and default_gas_station is not null;
+
 ```
 
 ### Aufgabe 11
@@ -128,7 +169,12 @@ Wie viele Benutzer haben einen LKW registriert?
 
 #### Lösung
 ```sql
-Deine Lösung
+select count(account_id) as Anzahl_LKW_Nutzer from acc_vehic av
+inner join vehicle vehc
+on (av.vehicle_id = vehc.vehicle_id)
+inner join vehicle_type t
+on (vehc.vehicle_type_id = t.vehicle_type_id)
+where t.vehicle_type_name = 'LKW';
 ```
 
 ### Aufgabe 12
@@ -152,7 +198,14 @@ Aktualisiere den Steuersatz aller Belege auf den Steuersatz des Landes, indem di
 
 #### Lösung
 ```sql
-Deine Lösung
+select count(distinct account_id) as Anzahl_PKW_und_LKW_Nutzer from acc_vehic av
+inner join vehicle vehc
+on (av.vehicle_id = vehc.vehicle_id)
+inner join vehicle_type t
+on (vehc.vehicle_type_id = t.vehicle_type_id)
+where t.vehicle_type_name in ('LKW', 'PKW')
+group by account_id
+having count(distinct t.vehicle_type_name) = 2;
 ```
 
 
