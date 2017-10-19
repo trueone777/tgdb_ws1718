@@ -160,8 +160,7 @@ Select default_gas_station,a.forename as Vorname, a.surname as Nachname
 from acc_vehic av
 inner join account a
 on (av.account_id = a.account_id)
- where default_gas_station != 1 and default_gas_station is not null;
-
+where default_gas_station is not null and default_gas_station in (Select gas_station_id from gas_station where country_id != 1);
 ```
 
 ### Aufgabe 11
