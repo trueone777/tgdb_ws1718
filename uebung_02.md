@@ -17,7 +17,7 @@ Schaue dir das Datenbankmodell an. Wofür steht hinter dem Datentyp `NUMBER` die
 Nehme dir die Oracle [Dokumentation](https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#CNCPT012) zu Hilfe.
 
 #### Lösung
-Die erste Zahl gibt die Geamtanzahl der Ziffern einer Zahl, die zweite Zahl die Anzahl der Stellen nach dem Komma der Zahl an.
+Die erste Zahl gibt die Anzahl der Stellen vor dem Komma, die zweite Zahl die Anzahl der Stellen nach dem Komma einer Zahl ein.
 
 ### Aufgabe 2
 Was bedeuten die durchgezogenen Linien, die zwischen einigen Tabellen abgebildet sind?
@@ -29,7 +29,7 @@ Es besteht eine Relation zwischen den Tabellen.
 Was bedeutet die gestrichelte Linie, die zwischen der Tabelle `ACC_VEHIC` und `GAS_STATION` abgebildet ist?
 
 #### Lösung
-Nicht identifizierende Beziehung - Der Fremdschlüssel DEFAUL_GAS_STATION gehört nicht zum Primärschlüssel von ACC_VEHIC. 
+Nicht identifizierende Beziehung - Der Fremdschlüssel DEFAULT_GAS_STATION gehört nicht zum Primärschlüssel von ACC_VEHIC. 
 
 ### Aufgabe 4
 Die folgende Abbildung beschreibt eine Beziehung zwischen Tabellen. Sie wird auch `n` zu `m` Beziehung genannt. Beschreibe kurz die Bedeutung dieser Beziehung.
@@ -122,9 +122,7 @@ Verknüpfe das aus Aufgabe 13 erstellte neue Auto mit deinem neuen Benutzer aus 
 ```sql
 insert into acc_vehic 
 values (1818,10,7777, 'BW:345:Z009', 'Flitzer', 165000,25000,120000,75000,to_date ('22.05.2016','DD.MM.YYYY'), to_date ('17.08.2017','DD.MM.YYYY'),null,sysdate,sysdate);
-```
 
-```sql
 insert into receipt
 values (12345,10,1818,7.55,3,5,1.44,32345.11,160,sysdate,sysdate,sysdate);
 ```
