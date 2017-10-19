@@ -118,7 +118,7 @@ where veh.vehicle_id not in (Select vehicle_id from acc_vehic);
 Verknüpfe eines der Autos aus Aufgabe 6 mit deinem Benutzernamen. Verwende dazu möglichst wenige SQL-Statements.
 
 #### Lösung
-```
+```sql
 insert into acc_vehic
 values (5661, 10, 1, 'g:334' , 'Autowrack', 555.55,210000, 477.77, 245000, sysdate, sysdate, null,sysdate,sysdate);
 ```
