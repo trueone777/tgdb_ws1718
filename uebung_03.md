@@ -181,11 +181,18 @@ Wie viele Benutzer haben einen PKW und einen LKW registriert?
 
 #### Lösung
 ```sql
-Deine Lösung
+select count(distinct account_id) as Anzahl_PKW_und_LKW_Nutzer from acc_vehic av
+inner join vehicle vehc
+on (av.vehicle_id = vehc.vehicle_id)
+inner join vehicle_type t
+on (vehc.vehicle_type_id = t.vehicle_type_id)
+where t.vehicle_type_name in ('LKW', 'PKW')
+group by account_id
+having count(distinct t.vehicle_type_name) = 2;
 ```
 
 ### Aufgabe 13
-Führe den Patch `02_patch.sql`, der sich im Verzeichnis `sql` befindet, in deiner Datenbank aus. Wie lautet der Befehlt zum import?
+Importieren sie den Patch `02_patch.sql` in ihre Datenbank. Wie lautet der Befehlt zum import?
 
 #### Lösung
 ```sql
@@ -197,14 +204,7 @@ Aktualisiere den Steuersatz aller Belege auf den Steuersatz des Landes, indem di
 
 #### Lösung
 ```sql
-select count(distinct account_id) as Anzahl_PKW_und_LKW_Nutzer from acc_vehic av
-inner join vehicle vehc
-on (av.vehicle_id = vehc.vehicle_id)
-inner join vehicle_type t
-on (vehc.vehicle_type_id = t.vehicle_type_id)
-where t.vehicle_type_name in ('LKW', 'PKW')
-group by account_id
-having count(distinct t.vehicle_type_name) = 2;
+Deine Lösung
 ```
 
 
