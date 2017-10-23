@@ -67,7 +67,17 @@ Füge eine fiktive Tankstelle hinzu. Sie darf auf keine bestehenden Informatione
 
 #### Lösung
 ```sql
-Deine Lösung
+insert into address
+values (8989,2331,'MeineStadt');
+
+insert into country
+values (1889,'Traumland',.89);
+
+insert into provider 
+values (1211, 'TSA');
+
+insert into gas_station
+values (1122,1211,1889,8989,'Langestrasse');
 ```
 
 ### Aufgabe 5
