@@ -17,7 +17,16 @@ Um genauere Informationen und Prognosen mit Data Mining Werkzeugen zu schöpfen,
 
 #### Lösung
 ```sql
-Deine Lösung
+create table residence ( 
+res_id number(5) not null,
+street varchar(40) not null,
+plz number(5) not null,
+city varchar(32) not null);
+
+create table res_acc (
+account_id number(38) not null,
+first_res_id number(38) not null,
+second_res_id number(38));
 ```
 
 ### Aufgabe 2
