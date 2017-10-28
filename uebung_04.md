@@ -50,6 +50,14 @@ where extract(YEAR from c_date) = 2017
 and price_l*liter*(1+duty_amount) > (Select avg(price_l*liter*(1+duty_amount)) from receipt);
 ```
 
+```sql
+Für Liter:
+select distinct account_id
+from receipt
+where extract(YEAR from c_date) = 2017
+and receipt.liter > (Select avg(liter) from receipt);
+```
+
 ### Aufgabe 4
 Ermittle, warum du INSERT-Rechte auf die Tabelle `SCOTT.EMP` und UPDATE-Rechte auf die Tabelle `SCOTT.DEPT` besitzt. Beantworte dazu schrittweise die Aufgaben von 4.1 bis 4.4.
 
