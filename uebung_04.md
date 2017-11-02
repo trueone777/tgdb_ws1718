@@ -27,6 +27,21 @@ create table res_acc (
 account_id number(38) not null,
 first_res_id number(38) not null,
 second_res_id number(38));
+
+alter table residence
+add constraint pk_residence primary key (res_id);
+
+alter table res_acc
+add constraint pk_res_acc primary key(account_id,first_res_id);
+
+alter table res_acc
+add constraint fk_res_acc_residence foreign key (account_id)
+references account;
+
+alter table res_acc
+add constraint fk_res_acc_residence2 foreign key (first_res_id)
+references residence(res_id);
+
 ```
 
 ### Aufgabe 2
@@ -69,7 +84,9 @@ Wurden die Tabellen-Rechte direkt an dich bzw. an `PUBLIC` vergeben?
 select * from all_tab_privs
 where table_schema='SCOTT';
 
-update Rechte von DEPT an public vergeben
+update Rechte von Scott tabelle: DEPT an public vergeben
+select Rechte von Scott tabelle:salgrade an public vergeben
+insert Rechte von Scott tabelle:bonus an mich vergeben
 ```
 
 #### Aufgabe 4.2
@@ -96,7 +113,8 @@ Haben die Rollen Rechte an `SCOTT.EMP` oder `SCOTT.DEPT`?
 ##### Lösung
 ```sql
 select * from role_role_privs;
-dept gibt keine rechte an rollen, sonder direkt an public
+Scptt vergibt für dept gibt keine rechte an rollen, sonder direkt an public
+keine Rechte an Scott.Emp
 ```
 
 ### Aufgabe 5
