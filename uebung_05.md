@@ -16,12 +16,23 @@
 Erstelle mit Dia oder einem anderen Werkzeug eine Abbilung der Mengen, die durch `INNER JOIN`, `RIGHT JOIN`, `LEFT JOIN` und `OUTER JOIN` gemeint sind.
 
 #### Lösung
-> Deine Lösung
+> Mit Dia abgebildet
 
 ### Aufgabe 2
 Welche Personen haben kein Fahrzeug? Löse dies einmal mit `LEFT JOIN` und `RIGHT JOIN`.
 
 #### Lösung
 ```sql
-Deine Lösung
+select surname, forename
+from account a
+left join acc_vehic ac
+on (a.account_id = ac.account_id)
+where vehicle_id is null;
+
+
+select surname, forename, vehicle_id
+from acc_vehic ac
+right join account a
+on (ac.account_id = a.account_id)
+where vehicle_id is null;
 ```
