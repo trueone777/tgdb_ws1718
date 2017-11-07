@@ -20,7 +20,12 @@ Wie heißt der Primary Key Contraint der Tabelle `VEHICLE` und für welche Spalt
 
 #### Lösung
 ```sql
-Deine Lösung
+select constraint_name,column_name
+from user_cons_columns
+where constraint_name = (select constraint_name
+from user_constraints uc
+where uc.table_name='VEHICLE' and
+constraint_type='P');
 ```
 
 ### Aufgabe 2
@@ -28,7 +33,12 @@ Für welche Spalte**n** der Tabelle `ACC_VEHIC` wurde ein Foreign Key angelegt u
 
 #### Lösung
 ```sql
-Deine Lösung
+select constraint_name, column_name, table_name
+from user_cons_columns
+where constraint_name in (Select constraint_name
+from user_constraints uc
+where uc.table_name='ACC_VEHIC' and
+constraint_type='R');
 ```
 
 ### Aufgabe 3
@@ -36,7 +46,11 @@ Erstelle einen Check Constraint für die Tabelle `ACCOUNT`, dass der Wert der Sp
 
 #### Lösung
 ```sql
-Deine Lösung
+alter table account
+add constraint c_datum
+check (u_date <= c_date);
+
+Bei Bedarf: enable novalidate, hinter den Ausruck
 ```
 
 ### Aufgabe 4
@@ -44,7 +58,9 @@ Erstelle einen Check Constraint der überprüft, ob der erste Buchstabe der Spal
 
 #### Lösung
 ```sql
-Deine Lösung
+alter table gas
+add constraint c_gas check
+(GAS_NAME = initcap(GAS_NAME));
 ```
 
 ### Aufgabe 5
@@ -58,7 +74,10 @@ Erstelle einen Check Contraint der überprüft, ob der Wert der Spalte `IDENTICA
 
 #### Lösung
 ```sql
-Deine Lösung
+alter table acc_vehic
+add constraint c_identicator
+check
+(regexp_like(identicator,'^[A-Z]{1,3}:([0-9]{1,6}|[A-Z]{2}:[0-9]{1,4})$','c'));
 ```
 
 ### Aufgabe 6 - Wiederholung
