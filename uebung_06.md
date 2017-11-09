@@ -85,7 +85,10 @@ Liste für alle Personen den Verbrauch an Kraftstoff auf (Missachte hier die unt
 
 #### Lösung
 ```sql
-Deine Lösung
+select surname, sum(liter) as liter, sum(price_l*liter*(1+r.duty_amount)) as preis
+from receipt r
+inner join account a on (r.account_id = a.account_id)
+group by surname;
 ```
 
 ### Aufgabe 7 - Wiederholung
@@ -93,7 +96,12 @@ Liste die Tankstellen absteigend sortiert nach der Kundenanzahl über alle Jahre
 
 #### Lösung
 ```sql
-Deine Lösung
+select provider_name as Tankstelle, sum(account_id) as "Anzahl Kunden"
+from gas_station gs
+inner join receipt r on (gs.gas_station_id = r.gas_station_id)
+inner join provider p on (gs.provider_id = p.provider_id)
+group by provider_name
+order by sum(account_id) desc;
 ```
 
 ### Aufgabe 8 - Wiederholung
@@ -103,7 +111,17 @@ Berücksichtige bitte jegliche Constraints!
 
 #### Lösung
 ```sql
-Deine Lösung
+CREATE TABLE logbook
+( log_id number(10) NOT NULL,
+  account_id number(38) NOT NULL,
+  acc_vehic_id number(38) NOT NULL,
+  kilometer number(7,2) NOT NULL,
+  c_date date NOT NULL,
+  t_date date NOT NULL,
+  CONSTRAINT pk_log_id PRIMARY KEY (log_id),
+  CONSTRAINT fk_account_id FOREIGN KEY (account_id) references account(account_id),
+  CONSTRAINT fk_account_vehic_id FOREIGN KEY (acc_vehic_id) references acc_vehic(acc_vehic_id)
+);
 ```
 
 
