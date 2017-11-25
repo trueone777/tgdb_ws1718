@@ -17,7 +17,33 @@ Erstelle eine Prozedur, die das anlegen von Benutzern durch übergabe von Parame
 
 #### Lösung
 ```sql
-Deine Lösung
+CREATE OR REPLACE PROCEDURE insert_acc(surname_in IN VARCHAR2, forename_in IN VARCHAR2, email_in IN VARCHAR2)
+
+AS
+
+	v_account_id account.account_id%TYPE;
+
+BEGIN
+	select max(account_id)+1 into v_account_id from account;
+
+	if surname_in IS NULL OR forename_in IS NULL OR email_in IS NULL THEN
+		RAISE_APPLICATION_ERROR (-20112, 'Darf nicht null sein');
+	end if;
+
+	insert into account
+	values (v_account_id, surname_in, forename_in, email_in, sysdate,sysdate);
+	
+
+	
+
+EXCEPTION
+
+	WHEN others THEN
+
+		RAISE_APPLICATION_ERROR (-20501, 'Vorgang abgebrochen!');
+
+END;
+/
 ```
 
 ### Aufgabe 2
