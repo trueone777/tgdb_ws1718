@@ -16,13 +16,17 @@
 Wo liegen die Vor- und Nachteile eines Trigger in Vergleich zu einer Prozedur?
 
 #### Lösung
-Deine Lösung
+Trigger werden immer wieder automatisch ausgeführt, falls ein Ereignis in der Datenbank passiert.
+Eine Prozedur muss man explizit ausführen.
+Der Nachteil des Triggers ist, dass es zu einer Trigger Verkettung kommen kann. Trigger müssen dann
+auf Ausführungen anderer Trigger warten um die Operation abzuschließen. Das führt zur langsamer Performance.
 
 ### Aufgabe 2
 Wo drin unterscheidet sich der `Row Level Trigger` von einem `Statement Trigger`?
 
 #### Lösung
-Deine Lösung
+Row Level Trigger - Der Trigger wird bei jeder Zeile in der Tabelle ausgeführt
+Statement Trigger - Der Trigger wird nur einmal ausgeführt, egal ob Zeilen in der Tabelle vorhanden sind oder nicht.
 
 ### Aufgabe 3
 Schaue dir den folgenden PL/SQL-Code an. Was macht er?
@@ -53,7 +57,10 @@ END;
 ```
 
 #### Lösung
-Deine Lösung
+Zuerst wird eine Sequence mit einem Zahlenbereich angelegt, wobei es immer um 1 inkrementiert wird.
+Falls man die account_id in der Tabelle account einfügen oder verändern möchte, wird davor ein Trigger ausgelöst.
+Bei einem Update des Datensatzes stellt er sicher, dass man die AccountID nicht verändern kann.
+Fügt man einen neuen Eintrag hinzu so wird als account_id eine neu generierte Zahl aus der Sequence übernommen. (Auto Increment)
 
 ### Aufgabe 4
 Verbessere den Trigger aus Aufgabe 2 so, dass
@@ -67,7 +74,63 @@ Nutze die Lösung der Aufgabe 2, Aufgabenblatt 8 um die Aufgabe zu lösen. Dort 
 
 #### Lösung
 ```sql
-Deine Lösung
+CREATE OR REPLACE TRIGGER receipt_trigger
+	BEFORE 
+			INSERT
+		OR	UPDATE receipt_id, account_id, acc_vehic_id, duty_amount,gas_id,
+			gas_station_id,price_l,kilometer,liter,receipt_date,c_date,u_date
+	ON receipt
+	FOR EACH ROW
+BEGIN
+	CASE
+		WHEN INSERTING THEN
+			DBMS_OUTPUT.PUT_LINE('Inserting ' || :NEW.Spalte1)
+		WHEN UPDATING (receipt_id) THEN
+			IF (NEW.receipt_id IS NULL) THEN
+				receipt_id = receipt_id;
+			END IF;
+			
+			
+			
+		WHEN UPDATING (account_id) THEN
+			IF (NEW.account_id IS NULL) THEN
+				account_id = account_id;
+			END IF;
+
+									
+		WHEN UPDATING (acc_vehic_id) THEN
+			IF (NEW.acc_vehic_id IS NULL) THEN
+				acc_vehic_id = acc_vehic_id;
+			END IF;
+		WHEN UPDATING (duty_amount) THEN
+			IF (NEW.duty_amount IS NULL) THEN
+				NEW.duty_amount = duty_amount;
+			END IF;
+		WHEN UPDATING (gas_id) THEN
+			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
+		WHEN UPDATING (gas_station_id) THEN
+			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
+		WHEN UPDATING (price_l) THEN
+			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
+		WHEN UPDATING (kilometer) THEN
+			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
+		WHEN UPDATING (liter) THEN
+			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
+		WHEN UPDATING (receipt_date) THEN
+			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
+		WHEN UPDATING (c_date) THEN
+			IF (c_date > sysdate) THEN
+				raise_application_error(-20000,'c_date darf nicht in der Zukunft liegen');
+			END IF;
+		WHEN UPDATING (u_date) THEN
+			IF (u_date < c_date) THEN
+				raise_application_error(-20000,'u_date muss groesser als c_date sein');
+			END IF;
+		WHEN DELETING THEN
+			DBMS_OUTPUT.PUT_LINE('Deleting ' || :OLD.Spalte1)
+			RAISE_APPLICATION_ERROR (-20501, 'Verboten!');
+	END CASE;
+END;
 ```
 
 ### Aufgabe 5
@@ -77,7 +140,7 @@ Angenommen der Steuersatz in Deutschland sinkt von 19% auf 17%.
 
 #### Lösung
 ```sql
-Deine Lösung
+
 ```
 
 ### Aufgabe 6
