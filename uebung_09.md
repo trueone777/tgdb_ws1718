@@ -74,63 +74,7 @@ Nutze die Lösung der Aufgabe 2, Aufgabenblatt 8 um die Aufgabe zu lösen. Dort 
 
 #### Lösung
 ```sql
-CREATE OR REPLACE TRIGGER receipt_trigger
-	BEFORE 
-			INSERT
-		OR	UPDATE receipt_id, account_id, acc_vehic_id, duty_amount,gas_id,
-			gas_station_id,price_l,kilometer,liter,receipt_date,c_date,u_date
-	ON receipt
-	FOR EACH ROW
-BEGIN
-	CASE
-		WHEN INSERTING THEN
-			DBMS_OUTPUT.PUT_LINE('Inserting ' || :NEW.Spalte1)
-		WHEN UPDATING (receipt_id) THEN
-			IF (NEW.receipt_id IS NULL) THEN
-				receipt_id = receipt_id;
-			END IF;
-			
-			
-			
-		WHEN UPDATING (account_id) THEN
-			IF (NEW.account_id IS NULL) THEN
-				account_id = account_id;
-			END IF;
 
-									
-		WHEN UPDATING (acc_vehic_id) THEN
-			IF (NEW.acc_vehic_id IS NULL) THEN
-				acc_vehic_id = acc_vehic_id;
-			END IF;
-		WHEN UPDATING (duty_amount) THEN
-			IF (NEW.duty_amount IS NULL) THEN
-				NEW.duty_amount = duty_amount;
-			END IF;
-		WHEN UPDATING (gas_id) THEN
-			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
-		WHEN UPDATING (gas_station_id) THEN
-			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
-		WHEN UPDATING (price_l) THEN
-			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
-		WHEN UPDATING (kilometer) THEN
-			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
-		WHEN UPDATING (liter) THEN
-			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
-		WHEN UPDATING (receipt_date) THEN
-			DBMS_OUTPUT.PUT_LINE('Updating Spalte1')
-		WHEN UPDATING (c_date) THEN
-			IF (c_date > sysdate) THEN
-				raise_application_error(-20000,'c_date darf nicht in der Zukunft liegen');
-			END IF;
-		WHEN UPDATING (u_date) THEN
-			IF (u_date < c_date) THEN
-				raise_application_error(-20000,'u_date muss groesser als c_date sein');
-			END IF;
-		WHEN DELETING THEN
-			DBMS_OUTPUT.PUT_LINE('Deleting ' || :OLD.Spalte1)
-			RAISE_APPLICATION_ERROR (-20501, 'Verboten!');
-	END CASE;
-END;
 ```
 
 ### Aufgabe 5
