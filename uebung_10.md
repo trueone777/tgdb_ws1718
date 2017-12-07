@@ -31,7 +31,7 @@ WHERE v.Anzahl = (
 ```
 
 #### Lösung
-Deine Lösung
+Es werden Vornamen und Nachnamen der Benutzer mit den meisten Autos angezeigt.
 
 ### Aufgabe 2
 Die folgende Aufgabe bezieht sich auf das Datenbankmodell der Vorlesung.
@@ -39,7 +39,10 @@ Geben Sie mit einem SQL Befehl alle Klausuren aus, zu denen sich Personen angeme
 
 #### Lösung
 ```sql
-Deine Lösung
+Select k.klausurnr, k.datum, k.hilfsmittel, k.dozenten, k.raum
+from anmeldung a
+inner join klausur k on a.klausurnr = k.klausurnr
+where note is null;
 ```
 
 ### Aufgabe 3
@@ -47,5 +50,8 @@ Finde mit der Option `EXISTS` herraus, wie viele Hersteller in der Datenbank hin
 
 #### Lösung
 ```sql
-Deine Lösung
+select p.producer_id,producer_name
+from producer p
+where not exists (Select * from vehicle v where v.producer_id=p.producer_id);
+
 ```
